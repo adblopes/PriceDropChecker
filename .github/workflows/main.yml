@@ -2,7 +2,7 @@ name: dotnet run
 
 on: 
   schedule: 
-  - cron: "*/5 * * * *"
+  - cron: "*/30 * * * *"
 
 jobs:
   build:
