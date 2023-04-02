@@ -20,7 +20,5 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
         run: dotnet restore
-      - name: change dir
-        run: cd PriceDropCheck
       - name: run
         run: dotnet run --PriceDropCheck PriceDropCheck.csproj
