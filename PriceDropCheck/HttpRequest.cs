@@ -6,7 +6,9 @@ namespace PriceDropCheck
     internal class HttpRequest
     {
         private readonly string Site = "https://www.ruroc.com";
+        private readonly string SiteSubPath = "en_eu/atlas-4-nebula-carbon.html";
         private readonly string FailureMessage = "Something's wrong, check site ";
+        private readonly string PriceMeta = "<meta property=\"product:price:amount\" content=";
         private readonly IEmailService _emailService;
 
         public HttpRequest(IEmailService emailService)
@@ -17,6 +19,7 @@ namespace PriceDropCheck
         public void Create()
         {
             var message = FailureMessage + Site + " Error: ";
+            var subject = "Price bot error";
 
             HttpClientHandler handler = new HttpClientHandler()
             {
@@ -26,14 +29,14 @@ namespace PriceDropCheck
             var client = new HttpClient(handler);
 
             client.BaseAddress = new Uri(Site);
-            HttpResponseMessage response = client.GetAsync("en_eu/atlas-4-nebula-carbon.html").Result;
+            HttpResponseMessage response = client.GetAsync(SiteSubPath).Result;
             
             try
             {
                 response.EnsureSuccessStatusCode();
                 string html = response.Content.ReadAsStringAsync().Result;
 
-                var priceProp = "<meta property=\"product:price:amount\" content=";
+                var priceProp = PriceMeta;
 
                 if (html.Contains(priceProp))
                 {
@@ -45,6 +48,7 @@ namespace PriceDropCheck
                         if (priceInt < 350)
                         {
                             message = $"Price Dropped! New price: {priceInt}.";
+                            subject = "Price Dropped!";
                         }
 
                         return;
@@ -60,7 +64,7 @@ namespace PriceDropCheck
                 message += "Problem pinging site.";
             }
 
-            _emailService.SendEmail(message);
+            _emailService.SendEmail(message, subject);
         }
     }
 }
