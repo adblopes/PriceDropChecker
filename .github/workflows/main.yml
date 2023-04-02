@@ -23,4 +23,4 @@ jobs:
       - name: change dir
         run: cd PriceDropCheck
       - name: run
-        run: dotnet run
+        run: dotnet run --PriceDropCheck PriceDropCheck.csproj
