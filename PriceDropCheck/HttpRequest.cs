@@ -41,6 +41,7 @@ namespace PriceDropCheck
                 if (html.Contains(priceProp))
                 {
                     var price = html.Substring(html.IndexOf(priceProp) + priceProp.Length + 1, 3);
+                    Console.WriteLine(price);
 
                     if (int.TryParse(price, out int priceInt))
                     {
@@ -50,7 +51,15 @@ namespace PriceDropCheck
                             subject = "Price Dropped!";
                         }
 
-                        subject = "Test mail";
+                        Random random = new Random();
+                        var send = random.Next(96); // once every 2 days (on average, since bots runs every 30 mins)
+                        
+                        if (send == 0)
+                        {
+                            // email here, return on else
+                        }
+                        subject = "Bot is still working";
+                        message = "This is the randomly sent email. Good news: the bot is still working.";
                     }
                     else
                     {
