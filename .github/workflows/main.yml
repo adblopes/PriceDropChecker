@@ -21,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: run
-        run: dotnet run --project ./home/runner/work/PriceDropChecker/PriceDropChecker/PriceDropCheck/PriceDropCheck.csproj
+        run: dotnet run --project ./PriceDropCheck/PriceDropCheck.csproj
