@@ -20,16 +20,8 @@ namespace PriceDropCheck
             email.From.Add(MailboxAddress.Parse(_config.GetSection("Email:From").Value));
             email.To.Add(MailboxAddress.Parse(_config.GetSection("Email:To").Value));
             
-            if (bool.TryParse(_config.GetSection("PriceBotDailyCheck").Value, out _))
-            {
-                email.Subject = "Daily check";
-                email.Body = new TextPart(TextFormat.Html) { Text = "No news today but the bot is working." };
-            }
-            else
-            {
-                email.Body = new TextPart(TextFormat.Html) { Text = body };
-                email.Subject = subject;
-            }
+            email.Body = new TextPart(TextFormat.Html) { Text = body };
+            email.Subject = subject;
 
             using var smtp = new SmtpClient();
             smtp.Connect(_config.GetSection("Email:Host").Value, 465, SecureSocketOptions.SslOnConnect);

@@ -41,7 +41,6 @@ namespace PriceDropCheck
                 if (html.Contains(priceProp))
                 {
                     var price = html.Substring(html.IndexOf(priceProp) + priceProp.Length + 1, 3);
-                    Console.WriteLine(price);
 
                     if (int.TryParse(price, out int priceInt))
                     {
