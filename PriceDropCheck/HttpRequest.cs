@@ -56,10 +56,14 @@ namespace PriceDropCheck
                         
                         if (send == 0)
                         {
-                            // email here, return on else
+                            subject = "Bot is still working";
+                            message = "This is the randomly sent email. Good news: the bot is still working.";
                         }
-                        subject = "Bot is still working";
-                        message = "This is the randomly sent email. Good news: the bot is still working.";
+                        else
+                        {
+                            return;
+                        }
+
                     }
                     else
                     {
