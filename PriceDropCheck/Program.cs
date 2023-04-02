@@ -17,8 +17,6 @@ using IHost host = Host.CreateDefaultBuilder(args)
 
 Run(host.Services);
 
-await host.RunAsync();
-
 static void Run(IServiceProvider hostProvider)
 {
     using IServiceScope serviceScope = hostProvider.CreateScope();

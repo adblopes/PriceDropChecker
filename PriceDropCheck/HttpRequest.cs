@@ -51,7 +51,7 @@ namespace PriceDropCheck
                             subject = "Price Dropped!";
                         }
 
-                        return;
+                        subject = "Test mail";
                     }
                     else
                     {
