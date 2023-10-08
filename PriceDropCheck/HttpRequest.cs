@@ -50,15 +50,6 @@ namespace PriceDropCheck
                             message = $"Price Dropped! New price: {priceInt}.";
                             subject = "Price Dropped!";
                         }
-
-                        Random random = new Random();
-                        var send = random.Next(96); // once every 2 days (on average, since bots runs every 30 mins)
-                        
-                        if (send == 0)
-                        {
-                            subject = "Bot is still working";
-                            message = "This is the randomly sent email. Good news: the bot is still working.";
-                        }
                         else
                         {
                             return;
@@ -67,13 +58,13 @@ namespace PriceDropCheck
                     }
                     else
                     {
-                        message += "Problem finding price.";
+                        message += "Problem finding price. Check: " + Site;
                     }
                 }
             }
             catch
             {
-                message += "Problem pinging site.";
+                message += "Problem pinging site. Check: " + Site;
             }
 
             _emailService.SendEmail(message, subject);
