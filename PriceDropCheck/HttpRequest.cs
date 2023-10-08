@@ -54,7 +54,6 @@ namespace PriceDropCheck
                         {
                             return;
                         }
-
                     }
                     else
                     {
